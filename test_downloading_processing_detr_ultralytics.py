@@ -47,7 +47,7 @@ def download_and_count():
             f.write(resp.content)
 
         # 2. Run YOLOv8 inference
-        results = model(img_path)[0]
+        results = model(img_path, conf=0.35)[0]    # Confidence threshold set to 0.35, gave better results
         class_ids = results.boxes.cls.cpu().numpy().astype(int).tolist()
 
         # 3. Count by class
